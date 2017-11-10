@@ -7,7 +7,8 @@
   ext.connectBLE = function(type) {
 		navigator.bluetooth.requestDevice({
 			filters: [
-				{ services: [ UUIDServices ] }
+				// { services: [ UUIDServices ] }
+				{ name: [ "Studuino-8D91751" ] }
 			]
 		})
     .then(device => {
