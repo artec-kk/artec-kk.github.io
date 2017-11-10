@@ -55,6 +55,7 @@
 	}
 
   ext.controlLED = function (device, type) {
+      debug(type);
   	if (type == "点灯") {
 			value = Uint8Array.of(
 				0xA1,
