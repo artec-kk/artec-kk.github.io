@@ -1,15 +1,15 @@
 (function (ext) {
 
-  const UUIDServices        = "442F1570-8A00-9A28-CBE1-E1D4212D53EB";
-  const UUIDCharacteristicsREAD   = "442F1571-8A00-9A28-CBE1-E1D4212D53EB";
-  const UUIDCharacteristicsWRITE  = "442F1572-8A00-9A28-CBE1-E1D4212D53EB";
+  const UUIDServices        = "442f1570-8a00-9a28-cbe1-e1d4212d53eb";
+  const UUIDCharacteristicsREAD   = "442f1571-8a00-9a28-cbe1-e1d4212d53eb";
+  const UUIDCharacteristicsWRITE  = "442f1572-8a00-9a28-cbe1-e1d4212d53eb";
 
   ext.connectBLE = function(type) {
 		navigator.bluetooth.requestDevice({
 		filters: [
 		{
 				services: [
-					"442f1572-8a00-9a28-cbe1-e1d4212d53eb"
+          UUIDServices
 				]
 			}
 			]
