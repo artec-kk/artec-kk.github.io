@@ -53,7 +53,20 @@
 	}
 
   ext.controlLED = function (device, type) {
-      return 0;
+  	if (type == "点灯") {
+			value = Uint8Array.of(
+				0xA1,
+				0x00,
+				0xA1
+			);
+			ledCharacteristic.writeValue(value);
+		} else {
+			value = Uint8Array.of(
+				0xA0,
+				0x00,
+				0xA0
+			);
+			ledCharacteristic.writeValue(value);
   }
 
   ext.log = function(str) {
