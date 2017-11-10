@@ -9,7 +9,8 @@
 			filters: [
 				// { services: [ UUIDServices ] }
 				{ name: [ "Studuino-8D91751" ] }
-			]
+			],
+			optionalServices: [ UUIDServices ]
 		})
     .then(device => {
       debug("デバイスを選択しました。接続します。");
