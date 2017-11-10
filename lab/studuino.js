@@ -4,6 +4,8 @@
   const UUIDCharacteristicsREAD   = "442f1571-8a00-9a28-cbe1-e1d4212d53eb";
   const UUIDCharacteristicsWRITE  = "442f1572-8a00-9a28-cbe1-e1d4212d53eb";
 
+  var ledCharacteristic;
+
   ext.connectBLE = function(type) {
 		navigator.bluetooth.requestDevice({
 			filters: [
