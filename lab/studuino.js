@@ -69,6 +69,7 @@
 				0xA0
 			);
 			ledCharacteristic.writeValue(value);
+		}
   }
 
   ext.log = function(str) {
