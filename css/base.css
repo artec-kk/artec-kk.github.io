@@ -1,0 +1,102 @@
+@charset "utf-8";
+
+/*
+	全ページ共通
+*/
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@font-face {
+  font-family: "Yu Gothic";
+  font-weight: 100;
+
+  src: local("Yu Gothic Medium");
+}
+@font-face {
+  font-family: "Yu Gothic";
+  font-weight: 200;
+
+  src: local("Yu Gothic Medium");
+}
+@font-face {
+  font-family: "Yu Gothic";
+  font-weight: 300;
+
+  src: local("Yu Gothic Medium");
+}
+@font-face {
+  font-family: "Yu Gothic";
+  font-weight: 400;
+
+  src: local("Yu Gothic Medium");
+}
+@font-face {
+  font-family: "Yu Gothic";
+  font-weight: bold;
+
+  src: local("Yu Gothic Bold");
+}
+@font-face {
+  font-family: "Yu Mincho";
+  font-weight: 100;
+
+  src: local("Yu Mincho Medium");
+}
+@font-face {
+  font-family: "Yu Mincho";
+  font-weight: 200;
+
+  src: local("Yu Mincho Medium");
+}
+@font-face {
+  font-family: "Yu Mincho";
+  font-weight: 300;
+
+  src: local("Yu Mincho Medium");
+}
+@font-face {
+  font-family: "Yu Mincho";
+  font-weight: 400;
+
+  src: local("Yu Mincho Medium");
+}
+@font-face {
+  font-family: "Yu Mincho";
+  font-weight: bold;
+
+  src: local("Yu Mincho Bold");
+}
+
+/* For modern browsers */
+.clearfix:after {
+    content:" ";
+    display:block;
+    clear:both;
+}
+li {
+	list-style: none;
+}
+
+img {
+	width:100%;
+	max-width: 100%;
+	height: auto;
+}
+
+html, body {
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, "Arial", "Yu Gothic", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+	font-size: 14px;
+	color: #4d4d4d;
+	margin: 20px;
+}
+
+table,
+th,
+tr {
+	border: solid 1px #4d4d4d;
+	border-collapse: collapse;
+}
+
+td {
+	border: solid 1px #4d4d4d;
+	border-collapse: collapse;
+	padding: 5px;
+}
