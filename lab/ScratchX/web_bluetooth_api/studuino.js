@@ -190,7 +190,7 @@
 			, accels:		['加速度1', '加速度2']
 		}
 		, blocks: [
-		, [' ', 'log %s',									'log', 'sample log']
+		  [' ', 'log %s',									'log', 'sample log']
 		,　[' ', "Studuino と %m.connects する",				'connectBLE', '接続']
 
 		// Studuino Blocks
