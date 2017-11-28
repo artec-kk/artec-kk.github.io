@@ -186,7 +186,6 @@
 		request = 'http://www.artec-kk.co.jp/lab/get_weather_info.php?zipcode=' + para;
 		alert(request);
 		$.ajax({
-			// url: request,
 			url: 'http://www.artec-kk.co.jp/lab/get_weather_info.php?zipcode=581-0066',
 		 	dataType: 'text'
 		 })
@@ -205,7 +204,7 @@
 			function () {
      		   alert("読み込み失敗");
     		}
-		});
+		);
 	};
 
 	var descriptor = {
