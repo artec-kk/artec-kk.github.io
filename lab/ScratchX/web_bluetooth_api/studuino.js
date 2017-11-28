@@ -147,7 +147,7 @@
 	ext.ledOnOff = function(led) {
 	};
 
-	ext.getSensorValue = function(sensor) {
+	ext.getSensorValue = function(sensor, pin) {
 	};
 
 	ext.getAccelerometer = function(sensor) {
@@ -166,6 +166,9 @@
 	};
 
 	ext.joinParameter = function(string, string) {
+	};
+
+	ext.getWeather = function(zip) {
 	};
 
 	var descriptor = {
@@ -204,6 +207,7 @@
 		// Wi-Fi Blocks
 		, [' ', 'SSID %s のアクセスポイントに %s で接続する',			'connectWiFi', '', '']
 		, ['r', 'http:// %s に　%s を送った結果',				'getHttp', 'www.artec-kk.co.jp/', '']
+		, ['r', '郵便番号 %s の明日の天気',						'getWeather', '']
 		, ['r', '%s と %s',									'joinParameter', '', '']
 
 		// Bluetooth Blocks
