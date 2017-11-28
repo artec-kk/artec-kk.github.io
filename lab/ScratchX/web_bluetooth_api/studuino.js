@@ -85,21 +85,12 @@
 					}
 				});
 			}
-
-
-
-
-		service.
-										mBLEService.setCharacteristicNotification(mCharaRead, true);
-										//if(mCharaRead.getUuid().equals(ARTEC_READ_CHARA)) {
-										BluetoothGattDescriptor desc = mCharaRead.getDescriptor(ARTEC_WRITE_DESC);
-										desc.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
-										mBLEService.writeDescriptor(desc);
-
-
-
-
-
+		// service.
+		// 								mBLEService.setCharacteristicNotification(mCharaRead, true);
+		// 								//if(mCharaRead.getUuid().equals(ARTEC_READ_CHARA)) {
+		// 								BluetoothGattDescriptor desc = mCharaRead.getDescriptor(ARTEC_WRITE_DESC);
+		// 								desc.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+		// 								mBLEService.writeDescriptor(desc);
 		})
 		.catch(error => {
 			debug("Error : " + error);
@@ -206,7 +197,7 @@
 		, ['r', 'タッチセンサー %m.digiPin の値',					'getTouchSensor',    'A0']
 		, ['r', '音センサー %m.anaPin の値',					'getSoundSensor',    'A0']
 		, ['r', '赤外線フォトリフレクタ %m.anaPin の値',				'getIRPhotoreflector','A0']
-		, ['r', '加速度センサー %m.accDirection の値',			'getAccelerometer','x']
+		, ['r', '加速度センサー %m.accDirection の値',			'getAccelerometer', 'x']
 		, ['r', 'ボタン %m.btnPin の値',						'getButton',         'A0']
 
 		// Wi-Fi Blocks
