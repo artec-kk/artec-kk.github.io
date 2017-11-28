@@ -165,16 +165,11 @@
 			url: request,
 		 	dataType: 'jsonp',
 			success: function(data) {
-				if (data.cod == 200) {
-					console.log(data);
-					var main = data.weather[0].main;
-				 	if (main == undefined) {
-						callback('');
-				 	} else {
-						callback(main);
-					}
-				} else {
+				console.log(data);
+			 	if (data == undefined) {
 					callback('');
+			 	} else {
+					callback(data);
 				}
 			}
 		});
@@ -192,16 +187,11 @@
 			url: request,
 		 	dataType: 'jsonp',
 			success: function(data) {
-				if (data.cod == 200) {
-					console.log(data);
-					var main = data.weather[0].main;
-				 	if (main == undefined) {
-						callback('');
-				 	} else {
-						callback(main);
-					}
-				} else {
+				console.log(data);
+			 	if (data == undefined) {
 					callback('');
+			 	} else {
+					callback(data);
 				}
 			}
 		});
