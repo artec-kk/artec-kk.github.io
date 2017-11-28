@@ -27,77 +27,77 @@
 	};
 
 	ext.connectBLE = function(type) {
-		navigator.bluetooth.requestDevice({
-			filters: [
-				// { services: [ UUIDServices ] }
-				{ name: [ "Studuino-8D91751" ] }
-			],
-			optionalServices: [ UUIDServices ]
-		})
-		.then(device => {
-			debug("デバイスを選択しました。接続します。");
-			debug("デバイス名 : " + device.name);
-			debug("ID : " + device.id);
+		// navigator.bluetooth.requestDevice({
+		// 	filters: [
+		// 		// { services: [ UUIDServices ] }
+		// 		{ name: [ "Studuino-8D91751" ] }
+		// 	],
+		// 	optionalServices: [ UUIDServices ]
+		// })
+		// .then(device => {
+		// 	debug("デバイスを選択しました。接続します。");
+		// 	debug("デバイス名 : " + device.name);
+		// 	debug("ID : " + device.id);
 
-			// 選択したデバイスに接続
-			return device.gatt.connect();
-		})
-		.then(server => {
-			debug("デバイスへの接続に成功しました。サービスを取得します。");
+		// 	// 選択したデバイスに接続
+		// 	return device.gatt.connect();
+		// })
+		// .then(server => {
+		// 	debug("デバイスへの接続に成功しました。サービスを取得します。");
 
-			// UUIDに合致するサービス(機能)を取得
-			return server.getPrimaryService(UUIDServices);
-		})
-		.then(service => {
-			debug("サービスの取得に成功しました。キャラクタリスティックを取得します。");
+		// 	// UUIDに合致するサービス(機能)を取得
+		// 	return server.getPrimaryService(UUIDServices);
+		// })
+		// .then(service => {
+		// 	debug("サービスの取得に成功しました。キャラクタリスティックを取得します。");
 
-			// UUIDに合致するキャラクタリスティック(サービスが扱うデータ)を取得
-			return service.getCharacteristic(UUIDCharacteristicsWRITE);
-		})
-		.then(characteristic => {
-			debug("キャラクタリスティックの取得に成功しました。");
+		// 	// UUIDに合致するキャラクタリスティック(サービスが扱うデータ)を取得
+		// 	return service.getCharacteristic(UUIDCharacteristicsWRITE);
+		// })
+		// .then(characteristic => {
+		// 	debug("キャラクタリスティックの取得に成功しました。");
 
-			ledCharacteristic = characteristic;
-			debug("BLE接続が完了しました。");
+		// 	ledCharacteristic = characteristic;
+		// 	debug("BLE接続が完了しました。");
 
 
-			/* */
-			self.services = await self.server.getPrimaryServices();
-			var self = this;
-			for (const service of services) {
-				console.log("> Service: " + service.uuid);
-				characteristics = await service.getCharacteristics();
-				characteristics.forEach(characteristic => {
-					console.log(">> Characteristic: " + characteristic.uuid + " " + getSupportedProperties(characteristic));
-					if (characteristic.uuid == "b3b39101-50d3-4044-808d-50835b13a6cd") {
-						console.log(">> addEventListener: write");
-						self.setWriteCharacteristic(characteristic);
-					}
-					else {
-						console.log(">> addEventListener: indicate");
-						self.writeCharacteristic2 = characteristic;
-						const result = characteristic.startNotifications();
-						console.log("> startNotifications result:" + result); {
-							console.log("> Notifications started");
-							self.connected = true;
-							self.writeCharacteristic2.addEventListener("characteristicvaluechanged", self.handleNotifications.bind(self));
-						}
-					}
-				});
-			}
+		// 	/* */
+		// 	self.services = await self.server.getPrimaryServices();
+		// 	var self = this;
+		// 	for (const service of services) {
+		// 		console.log("> Service: " + service.uuid);
+		// 		characteristics = await service.getCharacteristics();
+		// 		characteristics.forEach(characteristic => {
+		// 			console.log(">> Characteristic: " + characteristic.uuid + " " + getSupportedProperties(characteristic));
+		// 			if (characteristic.uuid == "b3b39101-50d3-4044-808d-50835b13a6cd") {
+		// 				console.log(">> addEventListener: write");
+		// 				self.setWriteCharacteristic(characteristic);
+		// 			}
+		// 			else {
+		// 				console.log(">> addEventListener: indicate");
+		// 				self.writeCharacteristic2 = characteristic;
+		// 				const result = characteristic.startNotifications();
+		// 				console.log("> startNotifications result:" + result); {
+		// 					console.log("> Notifications started");
+		// 					self.connected = true;
+		// 					self.writeCharacteristic2.addEventListener("characteristicvaluechanged", self.handleNotifications.bind(self));
+		// 				}
+		// 			}
+		// 		});
+		// 	}
 		// service.
 		// 								mBLEService.setCharacteristicNotification(mCharaRead, true);
 		// 								//if(mCharaRead.getUuid().equals(ARTEC_READ_CHARA)) {
 		// 								BluetoothGattDescriptor desc = mCharaRead.getDescriptor(ARTEC_WRITE_DESC);
 		// 								desc.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
 		// 								mBLEService.writeDescriptor(desc);
-		})
-		.catch(error => {
-			debug("Error : " + error);
+		// })
+		// .catch(error => {
+		// 	debug("Error : " + error);
 
-			// loading非表示
-			loading.className = "hide";
-		});
+		// 	// loading非表示
+		// 	loading.className = "hide";
+		// });
 	}
 
 	function debug(str) {
