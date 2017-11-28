@@ -180,6 +180,9 @@
 	ext.getResponse = function(response) {
 	};
 
+	ext.joinParameter = function(string, string) {
+	};
+
 	var descriptor = {
 		menus: {
 			  buttonStatus: ['押された', '放された']
@@ -221,7 +224,8 @@
 		, [' ', 'SSID %s のアクセスポイントに %s　で接続する',			'connectWiFi', '', '']
 		, [' ', 'http:// %s に　%s を送る',						'getHttp', 'www.artec-kk.co.jp/', '']
 		, [' ', 'http:// %s に　%s を送ってまつ',					'getHttpWithWait', 'www.artec-kk.co.jp/', '']
-		, ['r', 'レスポンス %s を受け取るまで待つ',					'getResponse', '']
+		, [' ', 'レスポンス %s を受け取るまで待つ',					'getResponse', '']
+		, ['r', '%s と %s',									'joinParameter', '', '']
 
 		// Bluetooth Blocks
 		, [' ', 'BLEの通信グループ %s を作る',					'dummy', '1']
