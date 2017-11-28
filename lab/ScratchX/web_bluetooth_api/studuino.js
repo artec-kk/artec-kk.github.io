@@ -200,7 +200,7 @@
 		, [' ', 'ブザー %m.digiPin から %n を出力する',			'buzzerOn',          'A0', 60]
 		, [' ', 'ブザー %m.digiPin off',						'buzzerOff',         'A0']
 		, [' ', 'LED %m.digiPin を %m.onOff する',			'ledOnOff',          'A0', '点灯']
-		, ['r', '%m.sensors %m.anaPin の値',					'getSensorValue',    ,'光センサー', 'A0']
+		, ['r', '%m.sensors %m.anaPin の値',					'getSensorValue',   '光センサー', 'A0']
 		, ['r', '加速度センサー %m.accDirection の値',			'getAccelerometer', 'x']
 		, ['r', 'ボタン %m.btnPin の値',						'getButton',         'A0']
 
