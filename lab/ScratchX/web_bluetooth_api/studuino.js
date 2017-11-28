@@ -220,7 +220,7 @@
 		// Wi-Fi Blocks
 		, [' ', 'SSID %ssid のアクセスポイントに %pw　で接続する',		'connectWiFi', 'SSID', 'PASSWORD']
 		, [' ', 'http:// %url に　%parameter を送る',			'getHttp', 'www.artec-kk.co.jp/', '']
-		, [' ', 'http:// %url に　%parameter を送ってまつ'		'getHttpWithWait', 'www.artec-kk.co.jp/', '']
+		, [' ', 'http:// %url に　%parameter を送ってまつ',		'getHttpWithWait', 'www.artec-kk.co.jp/', '']
 		, ['r', 'レスポンス %response を受け取るまで待つ',			'getResponse', '']
 
 		// Bluetooth Blocks
