@@ -221,7 +221,7 @@
 		, ['r', 'ボタン %m.btnPin の値',						'getButton',         'A0']
 
 		// Wi-Fi Blocks
-		, [' ', 'SSID %s のアクセスポイントに %s　で接続する',			'connectWiFi', '', '']
+		, [' ', 'SSID %s のアクセスポイントに %s で接続する',			'connectWiFi', '', '']
 		, [' ', 'http:// %s に　%s を送る',						'getHttp', 'www.artec-kk.co.jp/', '']
 		, [' ', 'http:// %s に　%s を送ってまつ',					'getHttpWithWait', 'www.artec-kk.co.jp/', '']
 		, [' ', 'レスポンス %s を受け取るまで待つ',					'getResponse', '']
