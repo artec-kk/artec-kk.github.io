@@ -140,23 +140,64 @@
 
 	var descriptor = {
 		menus: {
-				buttonStatus: ["押された", "放された"]
-			, outputs: ["on", "off"]
-			, lights: ["点灯", "消灯"]
-			, connects: ["接続", "切断"]
-			, analogConnecors: ["A0","A1","A2","A3","A4","A5","A6","A7","A6","A7" ]
-			, digitalConnecors: ["D2","D4","D7","D8","D9","D10","D11","D12" ]
-			, buttons: ["A0","A1","A2","A3" ]
-			, leds: ["A0","A1","A2","A3","A4","A5" ]
-			, dcmotors: ["M1","M2" ]
-			, moves: ["正転", "逆転"]
-			, accels: ["加速度1", "加速度2"]
+			  buttonStatus: ['押された', '放された']
+			, onOff:		['ON', 'OFF']
+			, lights:		['点灯', '消灯']
+			, connects:		['接続', '切断']
+			, anaPin:		['A0','A1','A2','A3','A4','A5','A6','A7','A6','A7' ]
+			, digiPin:		['A0','A1','A2','A3','A4','A5' ]
+			, svmPin:		['D2','D4','D7','D8','D9','D10','D11','D12' ]
+			, btnPin:		['A0','A1','A2','A3' ]
+			, ledPin:		['A0','A1','A2','A3','A4','A5' ]
+			, dcmPin:		['M1','M2' ]
+			, dcmDirection: ["正転", "逆転"]
+			, dcmStop:		["停止", "解放"]
+			, accDirection:	['X軸', 'Y軸', 'Z軸']
+			, accels:		['加速度1', '加速度2']
 		}
 		, blocks: [
-			[" ", "Studuino と %m.connects する", "connectBLE", "接続"]
-		// [" ", "サーボモーター %m.digitalConnecors を %m.connects にする", "moveServo", "D9", "90"]
-		, [" ", "LED %m.leds を %m.lights する", "controlLED", "A0", "点灯"]
-		, [" ", 'log %s', 'log', 'sample log']
+		, [' ', 'log %s',									'log', 'sample log']
+		,　[' ', "Studuino と %m.connects する",				'connectBLE', '接続']
+
+		// Studuino Blocks
+		, [' ', "LED %m.leds を %m.lights する",				"controlLED", "A0", '点灯']
+		, [' ', 'サーボモーター　%m.svmPin を %n 度にする',			'setMotorDegree',    'D9', 90]
+		, [' ', 'DCモーター %m.dcmPin の速さを %n にする',			'setMotorPower',     'M1', 100]
+		, [' ', 'DCモーター %m.dcmPin を %m.dcmDirection する',	'setMotorDirection', 'M1', '正転']
+		, [' ', 'DCモーター %m.dcmPin を %m.dcmStop する',		'setMotorStop',      'M1', '停止']
+		, [' ', 'ブザー %m.digiPin から %n を出力する',			'buzzerOn',          'A0', 60]
+		, [' ', 'ブザー %m.digiPin off',						'buzzerOff',         'A0']
+		, [' ', 'LED %m.digiPin を %m.onOff する',			'ledOnOff',          'A0', '点灯']
+		, ['r', '光センサー %m.anaPin の値',					'getLightSensor',    'A0']
+		, ['r', 'タッチセンサー %m.digiPin の値',					'getTouchSensor',    'A0']
+		, ['r', '音センサー %m.anaPin の値',					'getSoundSensor',    'A0']
+		, ['r', '赤外線フォトリフレクタ %m.anaPin の値',				'getIRPhotoreflector','A0']
+		, ['r', '加速度センサー %m.accDirection の値',			'getAccelerometer','x']
+		, ['r', 'ボタン %m.btnPin の値',						'getButton',         'A0']
+
+		// Wi-Fi Blocks
+
+
+		// Bluetooth Blocks
+
+
+		//　English Blocks
+		// , [' ', 'Set servomtor %m.svmPin to %n degrees',      'setMotorDegree',    'D9', 90]
+		// , [' ', 'DC motor %m.dcmPin power %n',                'setMotorPower',     'M1', 100]
+		// , [' ', 'DC motor %m.dcmPin on at %m.dcmDirection',   'setMotorDirection', 'M1', 'cw.']
+		// , [' ', 'DC motor %m.dcmPin off %m.dcmStop',          'setMotorStop',      'M1', 'Brake']
+		// , [' ', 'Buzzer %m.digiPin on frequency %n',          'buzzerOn',          'A0', 60]
+		// , [' ', 'Buzzer %m.digiPin off',                      'buzzerOff',         'A0']
+		// , [' ', 'LED %m.digiPin %m.onOff',                    'ledOnOff',          'A0', 'on']
+		// , ['r', 'Light Sensor %m.anaPin value',               'getLightSensor',    'A0']
+		// , ['r', 'Touch Sensor %m.digiPin value',              'getTouchSensor',    'A0']
+		// , ['r', 'Sound Sensor %m.anaPin value',               'getSoundSensor',    'A0']
+		// , ['r', 'IR Photoreflector %m.anaPin value',          'getIRPhotoreflector','A0']
+		// , ['r', '3-Axis Digital Accelerometer %m.accDirection value','getAccelerometer','x']
+		// , ['r', 'Button %m.btnPin value',                     'getButton',         'A0']
+
+
+
 		// , ["r", "光センサー　%m.leds　の値", "getLightSensorValue", "A0"]
 		// , ["h", "ボタン %m.buttons　が %m.buttonStatus とき", "isButtonPressed", ,"A0", "押された"]
 		// , ["b", "Pochiru が %m.btnStates", "isButtonClicked", "クリックされた"]
@@ -167,24 +208,6 @@
 	]
 	};
 
-	// 川瀬さんからいただいたブロックのソース。あとで取り込む。
-	// var descriptor = {
-	// 	blocks: [
-	// 		[' ', 'Set servomtor %m.svmPin to %n degrees',      'setMotorDegree',    'D9', 90],
-	// 		[' ', 'DC motor %m.dcmPin power %n',                'setMotorPower',     'M1', 100],
-	// 		[' ', 'DC motor %m.dcmPin on at %m.dcmDirection',   'setMotorDirection', 'M1', 'cw.'],
-	// 		[' ', 'DC motor %m.dcmPin off %m.dcmStop',          'setMotorStop',      'M1', 'Brake'],
-	// 		[' ', 'Buzzer %m.digiPin on frequency %n',          'buzzerOn',          'A0', 60],
-	// 		[' ', 'Buzzer %m.digiPin off',                      'buzzerOff',         'A0'],
-	// 		[' ', 'LED %m.digiPin %m.onOff',                    'ledOnOff',          'A0', 'on'],
-
-	// 		['r', 'Light Sensor %m.anaPin value',               'getLightSensor',    'A0'],
-	// 		['r', 'Touch Sensor %m.digiPin value',              'getTouchSensor',    'A0'],
-	// 		['r', 'Sound Sensor %m.anaPin value',               'getSoundSensor',    'A0'],
-	// 		['r', 'IR Photoreflector %m.anaPin value',          'getIRPhotoreflector','A0'],
-	// 		['r', '3-Axis Digital Accelerometer %m.accDirection value','getAccelerometer','x'],
-	// 		['r', 'Button %m.btnPin value',                     'getButton',         'A0']
-	// 	],
 	// 	menus: {
 	// 	  svmPin: ['D2', 'D4', 'D7', 'D8', 'D9', 'D10', 'D11', 'D12'],
 	// 	  dcmPin: ['M1', 'M2'],
