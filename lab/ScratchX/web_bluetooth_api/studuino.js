@@ -160,6 +160,24 @@
 	};
 
 	ext.getHttp = function(uri, para) {
+		request = 'http://' + uri + '?zipcode=' + para;
+		$.ajax({
+			url: request,
+		 	dataType: 'jsonp',
+			success: function(data) {
+				if (data.cod == 200) {
+					console.log(data);
+					var main = data.weather[0].main;
+				 	if (main == undefined) {
+						callback('');
+				 	} else {
+						callback(main);
+					}
+				} else {
+					callback('');
+				}
+			}
+		});
 	};
 
 	ext.getResponse = function(response) {
@@ -169,6 +187,24 @@
 	};
 
 	ext.getWeather = function(zip) {
+		request 'http://www.artec-kk.co.jp/lab/get_weather_info.php?zipcode=' + para;
+		$.ajax({
+			url: request,
+		 	dataType: 'jsonp',
+			success: function(data) {
+				if (data.cod == 200) {
+					console.log(data);
+					var main = data.weather[0].main;
+				 	if (main == undefined) {
+						callback('');
+				 	} else {
+						callback(main);
+					}
+				} else {
+					callback('');
+				}
+			}
+		});
 	};
 
 	var descriptor = {
