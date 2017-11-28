@@ -184,7 +184,8 @@
 	ext.getWeather = function(para) {
 		request = 'http://www.artec-kk.co.jp/lab/get_weather_info.php?zipcode=' + para;
 		$.ajax({
-			url: request,
+			// url: request,
+			url: 'http://www.artec-kk.co.jp/lab/get_weather_info.php?zipcode=' + para,
 		 	dataType: 'text',
 			success: function(data) {
 				alert(data);
