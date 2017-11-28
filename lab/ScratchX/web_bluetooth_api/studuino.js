@@ -197,7 +197,10 @@
 			 	} else {
 					callback(data);
 				}
-			}
+			},
+			error: function () {
+     		   alert("読み込み失敗");
+    		}
 		});
 	};
 
