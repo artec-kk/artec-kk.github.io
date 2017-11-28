@@ -181,7 +181,7 @@
 	ext.joinParameter = function(string, string) {
 	};
 
-	ext.getWeather = function(zip) {
+	ext.getWeather = function(para) {
 		request = 'http://www.artec-kk.co.jp/lab/get_weather_info.php?zipcode=' + para;
 		alert(request);
 		$.ajax({
