@@ -159,7 +159,7 @@
 	ext.connectWiFi = function(ssid, password) {
 	};
 
-	ext.getHttp = function(uri, para) {
+	ext.getHttp = function(uri, para, callback) {
 		request = 'http://' + uri + '?zipcode=' + para;
 		$.ajax({
 			type: 'get',
@@ -182,7 +182,7 @@
 	ext.joinParameter = function(string, string) {
 	};
 
-	ext.getWeather = function(para) {
+	ext.getWeather = function(para, callback) {
 		request = 'http://www.artec-kk.co.jp/lab/get_weather_info.php?zipcode=' + para;
 		$.ajax({
 			// url: request,
