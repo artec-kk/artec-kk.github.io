@@ -186,9 +186,9 @@
 		request = 'http://www.artec-kk.co.jp/lab/get_weather_info.php?zipcode=' + para;
 		alert(request);
 		$.ajax({
-			url: 'http://www.artec-kk.co.jp/lab/get_weather_info.php?zipcode=581-0066',
+			url: request,
 		 	dataType: 'text'
-		 })
+		})
 		.then(
 			// 成功時処理
 			function(data) {
