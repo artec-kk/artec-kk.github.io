@@ -135,10 +135,7 @@
 	ext.setMotorPower = function(dcm, power) {
 	};
 
-	ext.setMotorDirection = function(dcm, direction) {
-	};
-
-	ext.setMotorStop = function(dcm, stop) {
+	ext.setMotorAction = function(dcm, direction) {
 	};
 
 	ext.buzzerOn = function(buzzer, tone) {
@@ -150,16 +147,7 @@
 	ext.ledOnOff = function(led) {
 	};
 
-	ext.getLightSensor = function(sensor) {
-	};
-
-	ext.getTouchSensor = function(sensor) {
-	};
-
-	ext.getSoundSensor = function(sensor) {
-	};
-
-	ext.getIRPhotoreflector = function(sensor) {
+	ext.getSensorValue = function(sensor) {
 	};
 
 	ext.getAccelerometer = function(sensor) {
@@ -172,9 +160,6 @@
 	};
 
 	ext.getHttp = function(uri, para) {
-	};
-
-	ext.getHttpWithWait = function(uri, para) {
 	};
 
 	ext.getResponse = function(response) {
@@ -195,10 +180,10 @@
 			, btnPin:		['A0','A1','A2','A3' ]
 			, ledPin:		['A0','A1','A2','A3','A4','A5' ]
 			, dcmPin:		['M1','M2' ]
-			, dcmDirection: ['正転', '逆転']
-			, dcmStop:		['停止', '解放']
+			, dcmAction:    ['正転', '逆転', '停止', '解放']
 			, accDirection:	['X軸', 'Y軸', 'Z軸']
 			, accels:		['加速度1', '加速度2']
+			, sensors:		['光センサー', 'タッチセンサー', '音センサー', '赤外線フォトリフレクタ']
 		}
 		, blocks: [
 		  [' ', 'log %s',									'log', 'sample log']
@@ -208,23 +193,17 @@
 		, [' ', "LED %m.leds を %m.lights する",				"controlLED", "A0", '点灯']
 		, [' ', 'サーボモーター　%m.svmPin を %n 度にする',			'setMotorDegree',    'D9', 90]
 		, [' ', 'DCモーター %m.dcmPin の速さを %n にする',			'setMotorPower',     'M1', 100]
-		, [' ', 'DCモーター %m.dcmPin を %m.dcmDirection する',	'setMotorDirection', 'M1', '正転']
-		, [' ', 'DCモーター %m.dcmPin を %m.dcmStop する',		'setMotorStop',      'M1', '停止']
+		, [' ', 'DCモーター %m.dcmPin を %m.dcmAction する',		'setMotorAction', 'M1', '正転']
 		, [' ', 'ブザー %m.digiPin から %n を出力する',			'buzzerOn',          'A0', 60]
 		, [' ', 'ブザー %m.digiPin off',						'buzzerOff',         'A0']
 		, [' ', 'LED %m.digiPin を %m.onOff する',			'ledOnOff',          'A0', '点灯']
-		, ['r', '光センサー %m.anaPin の値',					'getLightSensor',    'A0']
-		, ['r', 'タッチセンサー %m.digiPin の値',					'getTouchSensor',    'A0']
-		, ['r', '音センサー %m.anaPin の値',					'getSoundSensor',    'A0']
-		, ['r', '赤外線フォトリフレクタ %m.anaPin の値',				'getIRPhotoreflector','A0']
+		, ['r', '%m.sensors %m.anaPin の値',					'getSensorValue',    ,'光センサー', 'A0']
 		, ['r', '加速度センサー %m.accDirection の値',			'getAccelerometer', 'x']
 		, ['r', 'ボタン %m.btnPin の値',						'getButton',         'A0']
 
 		// Wi-Fi Blocks
 		, [' ', 'SSID %s のアクセスポイントに %s で接続する',			'connectWiFi', '', '']
-		, [' ', 'http:// %s に　%s を送る',						'getHttp', 'www.artec-kk.co.jp/', '']
-		, [' ', 'http:// %s に　%s を送ってまつ',					'getHttpWithWait', 'www.artec-kk.co.jp/', '']
-		, [' ', 'レスポンス %s を受け取るまで待つ',					'getResponse', '']
+		, ['r', 'http:// %s に　%s を送った結果',				'getHttp', 'www.artec-kk.co.jp/', '']
 		, ['r', '%s と %s',									'joinParameter', '', '']
 
 		// Bluetooth Blocks
