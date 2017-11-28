@@ -147,10 +147,16 @@
 	ext.buzzerOff = function(buzzer) {
 	};
 
+	ext.ledOnOff = function(led) {
+	};
+
 	ext.getLightSensor = function(sensor) {
 	};
 
 	ext.getTouchSensor = function(sensor) {
+	};
+
+	ext.getSoundSensor = function(sensor) {
 	};
 
 	ext.getIRPhotoreflector = function(sensor) {
@@ -220,8 +226,6 @@
 		// , ['r', 'IR Photoreflector %m.anaPin value',          'getIRPhotoreflector','A0']
 		// , ['r', '3-Axis Digital Accelerometer %m.accDirection value','getAccelerometer','x']
 		// , ['r', 'Button %m.btnPin value',                     'getButton',         'A0']
-
-
 
 		// , ["r", "光センサー　%m.leds　の値", "getLightSensorValue", "A0"]
 		// , ["h", "ボタン %m.buttons　が %m.buttonStatus とき", "isButtonPressed", ,"A0", "押された"]
