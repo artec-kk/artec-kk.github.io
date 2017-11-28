@@ -218,17 +218,17 @@
 		, ['r', 'ボタン %m.btnPin の値',						'getButton',         'A0']
 
 		// Wi-Fi Blocks
-		, [' ', 'SSID %s のアクセスポイントに %s　で接続する',		'connectWiFi', 'SSID', 'PASSWORD']
+		, [' ', 'SSID %s のアクセスポイントに %s　で接続する',			'connectWiFi', '', '']
 		, [' ', 'http:// %s に　%s を送る',						'getHttp', 'www.artec-kk.co.jp/', '']
 		, [' ', 'http:// %s に　%s を送ってまつ',					'getHttpWithWait', 'www.artec-kk.co.jp/', '']
 		, ['r', 'レスポンス %s を受け取るまで待つ',					'getResponse', '']
 
 		// Bluetooth Blocks
-		// , [' ', 'BLEの通信グループ %group を作る',					'dummy', '1']
-		// , [' ', '無線で数値 %number を送る',						'dummy', '']
-		// , [' ', '無線で文字列 %string を送る',						'dummy', '']
-		// , ['h', '無線で %receiverNumber を受け取った時',				'dummy', 'received_number']
-		// , ['h', '無線で %name と %value を受け取った時',				'dummy', 'received_name', 'received_value']
+		, [' ', 'BLEの通信グループ %s を作る',					'dummy', '1']
+		, [' ', '無線で数値 %s を送る',							'dummy', '']
+		, [' ', '無線で文字列 %s を送る',						'dummy', '']
+		, ['h', '無線で %n を受け取った時',						'dummy', 'received_number']
+		, ['h', '無線で %s と %s を受け取った時',					'dummy', 'received_name', 'received_value']
 
 
 		//　English Blocks
