@@ -184,12 +184,15 @@
 
 	ext.getWeather = function(para, callback) {
 		request = 'http://www.artec-kk.co.jp/lab/get_weather_info.php?zipcode=' + para;
+		alert(request);
 		$.ajax({
 			// url: request,
-			type: 'get',
-			url: 'http://www.artec-kk.co.jp/lab/get_weather_info.php?zipcode=' + para,
-		 	dataType: 'text',
-			success: function(data) {
+			url: request,
+		 	dataType: 'text'
+		 })
+		.then(
+			// 成功時処理
+			function(data) {
 				alert(data);
 				console.log(data);
 			 	if (data == undefined) {
@@ -198,7 +201,8 @@
 					callback(data);
 				}
 			},
-			error: function () {
+			// エラー処理
+			function () {
      		   alert("読み込み失敗");
     		}
 		});
