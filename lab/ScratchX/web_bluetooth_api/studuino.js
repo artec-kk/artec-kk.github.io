@@ -181,8 +181,8 @@
 			, btnPin:		['A0','A1','A2','A3' ]
 			, ledPin:		['A0','A1','A2','A3','A4','A5' ]
 			, dcmPin:		['M1','M2' ]
-			, dcmDirection: ["正転", "逆転"]
-			, dcmStop:		["停止", "解放"]
+			, dcmDirection: ['正転', '逆転']
+			, dcmStop:		['停止', '解放']
 			, accDirection:	['X軸', 'Y軸', 'Z軸']
 			, accels:		['加速度1', '加速度2']
 		}
@@ -227,13 +227,13 @@
 		// , ['r', '3-Axis Digital Accelerometer %m.accDirection value','getAccelerometer','x']
 		// , ['r', 'Button %m.btnPin value',                     'getButton',         'A0']
 
-		// , ["r", "光センサー　%m.leds　の値", "getLightSensorValue", "A0"]
-		// , ["h", "ボタン %m.buttons　が %m.buttonStatus とき", "isButtonPressed", ,"A0", "押された"]
-		// , ["b", "Pochiru が %m.btnStates", "isButtonClicked", "クリックされた"]
-		// , [" ", "%m.sensors のLEDを %m.outputs にする", "controlLED", "Sizuku 6X", "on"]
-		// , [" ", "温度を %m.outputs にする", "controlTemperature", "on"]
-		// , [" ", "湿度を %m.outputs にする", "controlHumidity", "on"]
-		// , [" ", "加速度を %m.outputs にする", "controlACL", "on"]
+		// , ['r', '光センサー　%m.leds　の値', 'getLightSensorValue', 'A0']
+		// , ['h', 'ボタン %m.buttons　が %m.buttonStatus とき', 'isButtonPressed', ,'A0', '押された']
+		// , ['b', 'Pochiru が %m.btnStates', 'isButtonClicked', 'クリックされた']
+		// , [' ', '%m.sensors のLEDを %m.outputs にする', 'controlLED', 'Sizuku 6X', 'on']
+		// , [' ', '温度を %m.outputs にする', 'controlTemperature', 'on']
+		// , [' ', '湿度を %m.outputs にする', 'controlHumidity', 'on']
+		// , [' ', '加速度を %m.outputs にする', 'controlACL', 'on']
 	]
 	};
 
