@@ -168,9 +168,17 @@
 	ext.getButton = function(button) {
 	};
 
-	ext.dummy = function(str, str2) {
+	ext.connectWiFi = function(ssid, password) {
 	};
 
+	ext.getHttp = function(uri, para) {
+	};
+
+	ext.getHttpWithWait = function(uri, para) {
+	};
+
+	ext.getResponse = function(response) {
+	};
 
 	var descriptor = {
 		menus: {
@@ -210,10 +218,10 @@
 		, ['r', 'ボタン %m.btnPin の値',						'getButton',         'A0']
 
 		// Wi-Fi Blocks
-		, [' ', 'SSID %ssid のアクセスポイントに %pw　で接続する',		'dummy', 'SSID', 'PASSWORD']
-		, [' ', 'http:// %url に　%parameter を送る',				'dummy', 'www.artec-kk.co.jp/', '']
-		, [' ', 'http:// %url に　%parameter を送ってまつ'			'dummy', 'www.artec-kk.co.jp/', '']
-		, ['r', 'レスポンス %response を受け取るまで待つ',				'dummy', '']
+		, [' ', 'SSID %ssid のアクセスポイントに %pw　で接続する',		'connectWiFi', 'SSID', 'PASSWORD']
+		, [' ', 'http:// %url に　%parameter を送る',			'getHttp', 'www.artec-kk.co.jp/', '']
+		, [' ', 'http:// %url に　%parameter を送ってまつ'		'getHttpWithWait', 'www.artec-kk.co.jp/', '']
+		, ['r', 'レスポンス %response を受け取るまで待つ',			'getResponse', '']
 
 		// Bluetooth Blocks
 		// , [' ', 'BLEの通信グループ %group を作る',					'dummy', '1']
