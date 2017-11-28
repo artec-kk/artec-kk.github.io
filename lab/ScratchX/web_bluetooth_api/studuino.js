@@ -210,10 +210,10 @@
 		, ['r', 'ボタン %m.btnPin の値',						'getButton',         'A0']
 
 		// Wi-Fi Blocks
-		, [' ', 'SSID %ssid のアクセスポイントに %password　で接続する',	'dummy', 'SSID', 'PASSWORD']
-		// , [' ', 'http:// %url に　%parameter を送る',				'dummy', 'www.artec-kk.co.jp/', '']
-		// , [' ', 'http:// %url に　%parameter を送ってまつ'			'dummy', 'www.artec-kk.co.jp/', '']
-		// , ['r', 'レスポンス %response を受け取るまで待つ',				'dummy', '']
+		, [' ', 'SSID %ssid のアクセスポイントに %pw　で接続する',		'dummy', 'SSID', 'PASSWORD']
+		, [' ', 'http:// %url に　%parameter を送る',				'dummy', 'www.artec-kk.co.jp/', '']
+		, [' ', 'http:// %url に　%parameter を送ってまつ'			'dummy', 'www.artec-kk.co.jp/', '']
+		, ['r', 'レスポンス %response を受け取るまで待つ',				'dummy', '']
 
 		// Bluetooth Blocks
 		// , [' ', 'BLEの通信グループ %group を作る',					'dummy', '1']
