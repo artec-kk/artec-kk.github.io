@@ -138,6 +138,40 @@
 		alert(str);
 	};
 
+	ext.setMotorDegree = function(svm, degree) {
+	};
+
+	ext.setMotorPower = function(dcm, power) {
+	};
+
+	ext.setMotorDirection = function(dcm, direction) {
+	};
+
+	ext.setMotorStop = function(dcm, stop) {
+	};
+
+	ext.buzzerOn = function(buzzer, tone) {
+	};
+
+	ext.buzzerOff = function(buzzer) {
+	};
+
+	ext.getLightSensor = function(sensor) {
+	};
+
+	ext.getTouchSensor = function(sensor) {
+	};
+
+	ext.getIRPhotoreflector = function(sensor) {
+	};
+
+	ext.getAccelerometer = function(sensor) {
+	};
+
+	ext.getButton = function(button) {
+	};
+
+
 	var descriptor = {
 		menus: {
 			  buttonStatus: ['押された', '放された']
