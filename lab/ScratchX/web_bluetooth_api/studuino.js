@@ -168,6 +168,9 @@
 	ext.getButton = function(button) {
 	};
 
+	ext.dummy = function() {
+	};
+
 
 	var descriptor = {
 		menus: {
@@ -207,9 +210,17 @@
 		, ['r', 'ボタン %m.btnPin の値',						'getButton',         'A0']
 
 		// Wi-Fi Blocks
-
+		, [' ', 'SSID %ssid のアクセスポイントに %password　で接続する',	'dummy', 'SSID', 'PASSWORD']
+		, [' ', 'http:// %url に　%parameter を送る',				'dummy', 'www.artec-kk.co.jp/', '']
+		, [' ', 'http:// %url に　%parameter を送ってまつ'			'dummy', 'www.artec-kk.co.jp/', '']
+		, ['r', 'レスポンス %response を受け取るまで待つ',				'dummy', '']
 
 		// Bluetooth Blocks
+		, [' ', 'BLEの通信グループ %group を作る',					'dummy', '1']
+		, [' ', '無線で数値 %number を送る',						'dummy', '']
+		, [' ', '無線で文字列 %string を送る',						'dummy', '']
+		, ['h', '無線で %receiverNumber を受け取った時',				'dummy', 'received_number']
+		, ['h', '無線で %name と %value を受け取った時',				'dummy', 'received_name', 'received_value']
 
 
 		//　English Blocks
