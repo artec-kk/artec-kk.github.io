@@ -11,7 +11,8 @@ function connectBLE() {
 	alert("接続開始");
 	navigator.bluetooth.requestDevice({
 		filters: [{
-			services: [ "442f1570-8a00-9a28-cbe1-e1d4212d53eb" ]
+			acceptAllDevices:true,
+			optionalServices: [ "442f1570-8a00-9a28-cbe1-e1d4212d53eb" ]
 		}]
 	})
 	.then(device => {
