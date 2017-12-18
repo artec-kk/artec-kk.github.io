@@ -10,7 +10,8 @@ function connectBLE() {
 	alert("接続を開始します。");
 	navigator.bluetooth.requestDevice({
 		filters: [{
-			services: [ UUIDServices]
+			acceptAllDevices:true,optionalServices:[UUIDServices]
+			// services: [ UUIDServices]
 		}]
 	})
 	.then(device => {
