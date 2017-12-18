@@ -7,11 +7,10 @@ function connectBLE() {
 	const UUIDCharacteristicsREAD   = "442f1571-8a00-9a28-cbe1-e1d4212d53eb";
 	const UUIDCharacteristicsWRITE  = "442f1572-8a00-9a28-cbe1-e1d4212d53eb";
 
-	alert("接続を開始します。");
+	alert("接続開始");
 	navigator.bluetooth.requestDevice({
 		filters: [{
-			acceptAllDevices:true,optionalServices:[UUIDServices]
-			// services: [ UUIDServices]
+			services: [ UUIDServices]
 		}]
 	})
 	.then(device => {
@@ -20,22 +19,18 @@ function connectBLE() {
 		alert("ID : " + device.id);
 
 		studuino_device = device;
-		// 選択したデバイスに接続
-		return device.gatt.connect();
+		return device.gatt.connect();		// 選択したデバイスに接続
 	})
 	.then(server => {
-		alert("デバイスへの接続に成功しました。サービスを取得します。");
-
-		// UUIDに合致するサービス(機能)を取得
-		return server.getPrimaryService(UUIDServices);
+		alert("デバイス接続");
+		return server.getPrimaryService(UUIDServices);	// UUIDに合致するサービス(機能)を取得
 	})
 	.then(service => {
-		alert("サービスの取得に成功しました。キャラクタリスティックを取得します。");
-		// UUIDに合致するキャラクタリスティック(サービスが扱うデータ)を取得
-		return service.getCharacteristic(UUIDCharacteristicsWRITE);
+		alert("サービスの取得");
+		return service.getCharacteristic(UUIDCharacteristicsWRITE);	// UUIDに合致するキャラクタリスティック(サービスが扱うデータ)を取得
 	})
 	.then(characteristic => {
-		alert("キャラクタリスティックの取得に成功しました。");
+		alert("キャラクタリスティック取得");
 		ledCharacteristic = characteristic;
 		alert("BLE接続が完了しました。");
 
