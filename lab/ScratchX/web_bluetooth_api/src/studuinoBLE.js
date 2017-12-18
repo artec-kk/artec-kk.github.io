@@ -1,5 +1,6 @@
 var studuino_device;
-var studuino_characteristic;
+var studuino_characteristicWRITE;
+var studuino_characteristicREAD;
 function connectBLE() {
 	// loading表示
 	// loading.className = "show";
@@ -10,7 +11,7 @@ function connectBLE() {
 	alert("接続開始");
 	navigator.bluetooth.requestDevice({
 		filters: [{
-			services: [ UUIDServices]
+			services: [ "442f1570-8a00-9a28-cbe1-e1d4212d53eb" ]
 		}]
 	})
 	.then(device => {
@@ -31,7 +32,7 @@ function connectBLE() {
 	})
 	.then(characteristic => {
 		alert("キャラクタリスティック取得");
-		ledCharacteristic = characteristic;
+		studuino_characteristicWRITE = characteristic;
 		alert("BLE接続が完了しました。");
 
 		// LEDを切り替えるボタンを表示
