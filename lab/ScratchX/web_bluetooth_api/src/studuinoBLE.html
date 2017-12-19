@@ -4,8 +4,13 @@
 	</head>
 	<body>
 		<form name="ble">
-			<input type="button" value="接続" onclick="connectBLE();" />
-			<input type="button" value="切断" onclick="disconnect();" />
+			<input type="button" value="接続" onclick="BLEconnect();" />
+			<input type="button" value="切断" onclick="BLEdisconnect();" />
+			<br>
+			<input type="button" value="LED点灯" onclick="LEDcontrol(true);" />
+			<input type="button" value="LED消灯" onclick="LEDcontrol(false);" />
+			<br>
+			<input type="text" name="data" value="" />
 		</form>
 	</body>
 </html>
