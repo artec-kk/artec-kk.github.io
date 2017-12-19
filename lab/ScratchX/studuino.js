@@ -1,33 +1,35 @@
 (function (ext) {
 
-	const DATA1				= 0x80;
-	const DEV_DC_MOTOR		= DATA1 + 0x00;
-	const DEV_SERVO_MOTOR	= DATA1 + 0x10;
-	const DEV_BUZZER 		= DATA1 + 0x20;
-	const DEV_LED 			= DATA1 + 0x30;
-	const DEV_EXT 			= DATA1 + 0x50;
+	/*
+		data1部用コマンド定義
+	*/
+	const DATA1_BASE		= 0x80;
+	const DEV_DC_MOTOR		= DATA1_BASE + 0x00;
+	const DEV_SERVO_MOTOR	= DATA1_BASE + 0x10;
+	const DEV_BUZZER 		= DATA1_BASE + 0x20;
+	const DEV_LED 			= DATA1_BASE + 0x30;
+	const DEV_EXT 			= DATA1_BASE + 0x50;
 
+	/*
+		UUID
+	*/
 	const UUIDServices        		= "442f1570-8a00-9a28-cbe1-e1d4212d53eb";
 	const UUIDCharacteristicsREAD   = "442f1571-8a00-9a28-cbe1-e1d4212d53eb";
 	const UUIDCharacteristicsWRITE  = "442f1572-8a00-9a28-cbe1-e1d4212d53eb";
 
-	var ledCharacteristic;
 	var device;
 	var server;
 	var services;
-	var type = type;
 	var previousRcvData;
-	var writeCharacteristic;
-	var writeCharacteristic2;
-	var connected;
-	var disconnecting;
-
+	var studuino_characteristicWRITE;
+	var studuino_characteristicREAD;
 
 	function getPortNumber(device) {
 		return parseInt(device.substr(1));
 	}
 
 	function execute(value) {
+		value[2] = value[0] + value[1];
 		studuino_characteristicWRITE.writeValue(value);
 	}
 
@@ -47,53 +49,57 @@
 		return {status: 2, msg: 'Ready'};
 	};
 
-	ext.connectBLE = function(type) {
-		studuino_device = null;
-		navigator.bluetooth.requestDevice({
-			filters: [
-				 { namePrefix: 'Studuino' }
-			],
-			optionalServices: [ UUIDServices ]
-		})
-		.then(device => {
-			debug("デバイスを選択しました。接続します。");
-			debug("デバイス名 : " + device.name);
-			debug("ID : " + device.id);
+	/*
+		BLE接続/切断処理
+	*/
+	ext.controlBLE = function(mode) {
+		if(mode == "接続") {
+			studuino_device = null;
+			navigator.bluetooth.requestDevice({
+				filters: [
+					 { namePrefix: 'Studuino' }
+				],
+				optionalServices: [ UUIDServices ]
+			})
+			.then(device => {
+				debug("デバイスを選択しました。接続します。");
+				debug("デバイス名 : " + device.name);
+				debug("ID : " + device.id);
 
-			studuino_device = device;
-			return device.gatt.connect();		// 選択したデバイスに接続
-		})
-		.then(server => {
-			debug("デバイス接続");
-			return server.getPrimaryService(UUIDServices);	// UUIDに合致するサービス(機能)を取得
-		})
-		.then(service => {
-			debug("サービスの取得");
-			return Promise.all([
-	        service.getCharacteristic(UUIDCharacteristicsWRITE),
-	        service.getCharacteristic(UUIDCharacteristicsREAD)
-	      ]);
-		})
-		.then(characteristic => {
-			debug("キャラクタリスティック取得");
-			studuino_characteristicWRITE = characteristic[0];
-			studuino_characteristicREAD = characteristic[1];
-			studuino_characteristicREAD.startNotifications();
-			studuino_characteristicREAD.addEventListener('characteristicvaluechanged',onStuduinoValueChanged);  
+				studuino_device = device;
+				return device.gatt.connect();		// 選択したデバイスに接続
+			})
+			.then(server => {
+				debug("デバイス接続");
+				return server.getPrimaryService(UUIDServices);	// UUIDに合致するサービス(機能)を取得
+			})
+			.then(service => {
+				debug("サービスの取得");
+				return Promise.all([
+		        service.getCharacteristic(UUIDCharacteristicsWRITE),
+		        service.getCharacteristic(UUIDCharacteristicsREAD)
+		      ]);
+			})
+			.then(characteristic => {
+				debug("キャラクタリスティック取得");
+				studuino_characteristicWRITE = characteristic[0];
+				studuino_characteristicREAD = characteristic[1];
+				studuino_characteristicREAD.startNotifications();
+				studuino_characteristicREAD.addEventListener('characteristicvaluechanged',onStuduinoValueChanged);  
 
-			debug("BLE接続が完了しました。");
-		})
-		.catch(error => {
-			debug("Error : " + error);
-				// loading非表示
-				// loading.className = "hide";
-		});
-	}
-	function disconnectBLE() {
-		if (!studuino_device || !studuino_device.gatt.connected) return ;
-		studuino_device.gatt.disconnect();
-		debug_out("BLE接続を切断しました。");
-		studuino_device = null;
+				debug("BLE接続が完了しました。");
+			})
+			.catch(error => {
+				debug("Error : " + error);
+					// loading非表示
+					// loading.className = "hide";
+			});
+		} else {
+			if (!studuino_device || !studuino_device.gatt.connected) return ;
+			studuino_device.gatt.disconnect();
+			debug_out("BLE接続を切断しました。");
+			studuino_device = null;
+		}
 	}
 
 	function onStuduinoValueChanged(event) {
@@ -112,7 +118,6 @@
 			param[0] += 1;
 		}
 		param[1] = 0x00;
-		param[2] = param[0] + param[1];
 		execute(param);
 	}
 
@@ -123,7 +128,6 @@
 		var param = new Uint8Array(3);
 		param[0] = DEV_BUZZER + getPortNumber(buzzer) * 2 + 0x01;
 		param[1] = parseInt(tone);
-		param[2] = param[0] + param[1];
 		execute(param);
 	};
 
@@ -131,7 +135,6 @@
 		var param = new Uint8Array(3);
 		param[0] = DEV_BUZZER + getPortNumber(buzzer) * 2;
 		param[1] = 0;
-		param[2] = param[0] + param[1];
 		execute(param);
 	};
 
@@ -144,6 +147,10 @@
 	};
 
 	ext.setMotorPower = function(dcm, power) {
+		var param = new Uint8Array(3);
+		param[0] = DEV_DC_MOTOR + getPortNumber(dcm) * 8 + ;
+		param[1] = 0;
+		execute(param);
 	};
 
 	ext.setMotorAction = function(dcm, direction) {
@@ -227,7 +234,7 @@
 		}
 		, blocks: [
 		  [' ', 'log %s',									'log', 'sample log']
-		,　[' ', "Studuino と %m.connects する",				'connectBLE', '接続']
+		,　[' ', "Studuino と %m.connects する",				'controlBLE', '接続']
 
 		// Studuino Blocks
 		, [' ', 'LED %m.digiPin を %m.lights する',			'ledOnOff',          'A0', '点灯']
