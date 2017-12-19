@@ -111,7 +111,7 @@
 	ext.buzzerOn = function(buzzer, tone) {
 		var param = new Uint8Array(3);
 		param[0] = 0xa1 + getPortNumber(buzzer);
-		param[1] = tone;
+		param[1] = parseInt(tone);
 		param[2] = param[0] + param[1];
 		execute(param);
 	};
