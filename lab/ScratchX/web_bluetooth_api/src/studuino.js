@@ -94,9 +94,9 @@
 	/*
 		LEDを制御する
 	*/
-	ext.ledOnOff = function (device, type) {
+	ext.ledOnOff = function (led, type) {
 		var param = new Uint8Array(3);
-		param[0] = 0xb0 + getPortNumber(device);
+		param[0] = 0xb0 + getPortNumber(led);
 		if (type == "点灯") {
 			param[0] += 1;
 		}
@@ -110,7 +110,7 @@
 	*/
 	ext.buzzerOn = function(buzzer, tone) {
 		var param = new Uint8Array(3);
-		param[0] = 0xa1 + getPortNumber(device);
+		param[0] = 0xa1 + getPortNumber(buzzer);
 		param[1] = tone;
 		param[2] = param[0] + param[1];
 		execute(param);
@@ -118,7 +118,7 @@
 
 	ext.buzzerOff = function(buzzer) {
 		var param = new Uint8Array(3);
-		param[0] = 0xa0 + getPortNumber(device);
+		param[0] = 0xa0 + getPortNumber(buzzer);
 		param[1] = 0;
 		param[2] = param[0] + param[1];
 		execute(param);
