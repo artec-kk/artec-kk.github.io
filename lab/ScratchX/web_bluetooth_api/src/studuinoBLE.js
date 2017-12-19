@@ -78,9 +78,8 @@ function LEDcontrol(value) {
 			param[2] = param[0] + param[1];
 			msg = "LED OFF";
 		}
-
 		studuino_characteristicWRITE.writeValue(param);
-		alert(msg);
+		debug_out(msg);
 	}
 }
 
