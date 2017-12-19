@@ -1,6 +1,6 @@
 (function (ext) {
 
-	const UUIDServices        			= "442f1570-8a00-9a28-cbe1-e1d4212d53eb";
+	const UUIDServices        		= "442f1570-8a00-9a28-cbe1-e1d4212d53eb";
 	const UUIDCharacteristicsREAD   = "442f1571-8a00-9a28-cbe1-e1d4212d53eb";
 	const UUIDCharacteristicsWRITE  = "442f1572-8a00-9a28-cbe1-e1d4212d53eb";
 
