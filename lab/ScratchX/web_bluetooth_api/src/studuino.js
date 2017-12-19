@@ -15,6 +15,22 @@
 	var connected;
 	var disconnecting;
 
+
+	function getPortNumber(device) {
+		return parseInt(device.substr(1));
+	}
+
+	function execute(value) {
+		studuino_characteristicWRITE.writeValue(value);
+	}
+
+
+	function debug(str) {
+		// console.log(str);
+		// alert(str);
+	}
+
+
 	// Extension の状態を返すメソッド
 	// ---
 	// 返す値, 表示される色, 意味
@@ -75,26 +91,38 @@
 		studuino_device = null;
 	}
 
-	function debug(str) {
-		// console.log(str);
-		// alert(str);
-	}
-
-	ext.controlLED = function (device, type) {
-		debug(type);
+	/*
+		LEDを制御する
+	*/
+	ext.ledOnOff = function (device, type) {
 		var param = new Uint8Array(3);
-		param[0] = 0xb0 + parseInt(device.substr(1));
+		param[0] = 0xb0 + getPortNumber(device);
 		if (type == "点灯") {
 			param[0] += 1;
 		}
 		param[1] = 0x00;
 		param[2] = param[0] + param[1];
-		studuino_characteristicWRITE.writeValue(param);
+		execute(param);
 	}
 
-	function setLEDData(device, type) {
-	}
+	/*
+		ブザーを鳴らす
+	*/
+	ext.buzzerOn = function(buzzer, tone) {
+		var param = new Uint8Array(3);
+		param[0] = 0xa1 + getPortNumber(device);
+		param[1] = tone;
+		param[2] = param[0] + param[1];
+		execute(param);
+	};
 
+	ext.buzzerOff = function(buzzer) {
+		var param = new Uint8Array(3);
+		param[0] = 0xa0 + getPortNumber(device);
+		param[1] = 0;
+		param[2] = param[0] + param[1];
+		execute(param);
+	};
 
 	ext.log = function(str) {
 		// ログを出力する
@@ -108,15 +136,6 @@
 	};
 
 	ext.setMotorAction = function(dcm, direction) {
-	};
-
-	ext.buzzerOn = function(buzzer, tone) {
-	};
-
-	ext.buzzerOff = function(buzzer) {
-	};
-
-	ext.ledOnOff = function(led) {
 	};
 
 	ext.getSensorValue = function(sensor, pin) {
@@ -189,7 +208,6 @@
 			, digiPin:		['A0','A1','A2','A3','A4','A5' ]
 			, svmPin:		['D2','D4','D7','D8','D9','D10','D11','D12' ]
 			, btnPin:		['A0','A1','A2','A3' ]
-			, ledPin:		['A0','A1','A2','A3','A4','A5' ]
 			, dcmPin:		['M1','M2' ]
 			, dcmAction:    ['正転', '逆転', '停止', '解放']
 			, accDirection:	['X軸', 'Y軸', 'Z軸']
@@ -201,13 +219,12 @@
 		,　[' ', "Studuino と %m.connects する",				'connectBLE', '接続']
 
 		// Studuino Blocks
-		, [' ', "LED %m.leds を %m.lights する",				"controlLED", "A0", '点灯']
+		, [' ', 'LED %m.digiPin を %m.lights する',			'ledOnOff',          'A0', '点灯']
 		, [' ', 'サーボモーター　%m.svmPin を %n 度にする',			'setMotorDegree',    'D9', 90]
 		, [' ', 'DCモーター %m.dcmPin の速さを %n にする',			'setMotorPower',     'M1', 100]
 		, [' ', 'DCモーター %m.dcmPin を %m.dcmAction する',		'setMotorAction', 'M1', '正転']
 		, [' ', 'ブザー %m.digiPin から %n を出力する',			'buzzerOn',          'A0', 60]
 		, [' ', 'ブザー %m.digiPin off',						'buzzerOff',         'A0']
-		, [' ', 'LED %m.digiPin を %m.onOff する',			'ledOnOff',          'A0', '点灯']
 		, ['r', '%m.sensors %m.anaPin の値',					'getSensorValue',   '光センサー', 'A0']
 		, ['r', '加速度センサー %m.accDirection の値',			'getAccelerometer', 'x']
 		, ['r', 'ボタン %m.btnPin の値',						'getButton',         'A0']
