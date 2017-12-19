@@ -1,5 +1,12 @@
 (function (ext) {
 
+	const DATA1				= 0x80;
+	const DEV_DC_MOTOR		= DATA1 + 0x00;
+	const DEV_SERVO_MOTOR	= DATA1 + 0x10;
+	const DEV_BUZZER 		= DATA1 + 0x20;
+	const DEV_LED 			= DATA1 + 0x30;
+	const DEV_EXT 			= DATA1 + 0x50;
+
 	const UUIDServices        		= "442f1570-8a00-9a28-cbe1-e1d4212d53eb";
 	const UUIDCharacteristicsREAD   = "442f1571-8a00-9a28-cbe1-e1d4212d53eb";
 	const UUIDCharacteristicsWRITE  = "442f1572-8a00-9a28-cbe1-e1d4212d53eb";
@@ -24,12 +31,10 @@
 		studuino_characteristicWRITE.writeValue(value);
 	}
 
-
 	function debug(str) {
 		// console.log(str);
 		// alert(str);
 	}
-
 
 	// Extension の状態を返すメソッド
 	// ---
@@ -91,12 +96,18 @@
 		studuino_device = null;
 	}
 
+	function onStuduinoValueChanged(event) {
+		var val = studuino_characteristicREAD.readValue().getUint8(0);
+		var type = val & 0xc0;
+		alert(val.toString());
+	}
+
 	/*
 		LEDを制御する
 	*/
 	ext.ledOnOff = function (led, type) {
 		var param = new Uint8Array(3);
-		param[0] = 0xb0 + getPortNumber(led) * 2;
+		param[0] = DEV_LED + getPortNumber(led) * 2;
 		if (type == "点灯") {
 			param[0] += 1;
 		}
@@ -110,7 +121,7 @@
 	*/
 	ext.buzzerOn = function(buzzer, tone) {
 		var param = new Uint8Array(3);
-		param[0] = 0xa1 + getPortNumber(buzzer) * 2;
+		param[0] = DEV_BUZZER + 0x01 + getPortNumber(buzzer) * 2;
 		param[1] = parseInt(tone);
 		param[2] = param[0] + param[1];
 		execute(param);
@@ -118,7 +129,7 @@
 
 	ext.buzzerOff = function(buzzer) {
 		var param = new Uint8Array(3);
-		param[0] = 0xa0 + getPortNumber(buzzer) * 2;
+		param[0] = DEV_BUZZER + getPortNumber(buzzer) * 2;
 		param[1] = 0;
 		param[2] = param[0] + param[1];
 		execute(param);
