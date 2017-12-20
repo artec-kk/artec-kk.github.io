@@ -148,7 +148,7 @@
 
 	ext.setMotorPower = function(dcm, power) {
 		var param = new Uint8Array(3);
-		param[0] = DEV_DC_MOTOR + getPortNumber(dcm) * 8 + ;
+		param[0] = DEV_DC_MOTOR + getPortNumber(dcm) * 8;
 		param[1] = 0;
 		execute(param);
 	};
