@@ -9,6 +9,21 @@
 	const DEV_BUZZER 		= DATA1_BASE + 0x20;
 	const DEV_LED 			= DATA1_BASE + 0x30;
 	const DEV_EXT 			= DATA1_BASE + 0x50;
+	const DEV_INIT_SENSOR	= DATA1_BASE + 0x51;
+
+	const SENSOR_DIGITAL		= 0x00;
+	const SENSOR_ANALOG			= 0x10;
+	const SENSOR_ACCELEOMETER	= 0x20;
+	const SENSOR_TEMPERATURE	= 0x30;
+	const SENSOR_GYRO			= 0x40;
+
+	const DATA_MASK			= 0xc0;
+	const DATA_SENSOR1		= 0x00;
+	const DATA_SENSOR2		= 0x40;
+	const DATA_EXT1			= 0x80;
+	const DATA_EXT2			= 0xc0;
+
+	var sensorValue　= new Array(14);
 
 	/*
 		UUID
@@ -102,10 +117,28 @@
 		}
 	}
 
+	/*
+		Notification駆動でセンサーの値を更新
+	*/
 	function onStuduinoValueChanged(event) {
-		var val = studuino_characteristicREAD.readValue().getUint8(0);
-		var type = val & 0xc0;
-		alert(val.toString());
+	   	var val1 = event.target.value.getUint8(0);
+	   	var val2 = event.target.value.getUint8(0);
+		var type = val1 & DATA_MASK;
+		switch (type) {
+			case DATA_SENSOR1:
+				// 
+				sensorValue[(val1 & 0x3c) >> 2] = ((val1 & 0x03) << 6) + (val2 | 0x03f);
+			break;
+			case DATA_SENSOR2:
+				// 
+			break;
+			case DATA_EXT1:
+				// 
+			break;
+			case DATA_EXT2:
+				// 
+			break;
+		}
 	}
 
 	/*
@@ -157,6 +190,7 @@
 	};
 
 	ext.getSensorValue = function(sensor, pin) {
+		return  sensorValue[getPortNumber(pin)];
 	};
 
 	ext.getAccelerometer = function(sensor) {
@@ -168,34 +202,27 @@
 	ext.connectWiFi = function(ssid, password) {
 	};
 
-	ext.getHttp = function(uri, para, callback) {
-		request = 'http://' + uri + '?zipcode=' + para;
-		$.ajax({
-			type: 'get',
-			url: request,
-		 	dataType: 'text',
-			success: function(data) {
-				console.log(data);
-			 	if (data == undefined) {
-					callback('');
-			 	} else {
-					callback(data);
-				}
-			}
-		});
+	/*
+		アナログセンサーを初期化
+	*/
+	ext.initAnalogSensor = function(sensor, pin) {
+		var param = new Uint8Array(3);
+		param[0] = DEV_INIT_SENSOR;
+		param[1] = SENSOR_ANALOG + getPortNumber(pin);
+		execute(param);
+	};
+
+	/*
+		デジタルセンサーを初期化
+	*/
+	ext.initDigitalSensor = function(sensor, pin) {
+		var param = new Uint8Array(3);
+		param[0] = DEV_INIT_SENSOR;
+		param[1] = SENSOR_DIGITAL + getPortNumber(pin);
+		execute(param);
 	};
 
 	ext.getResponse = function(response) {
-	};
-
-	ext.getWeather = function(para, callback) {
-		request = 'http://www.artec-kk.co.jp/lab/get_weather_info.php?zipcode=' + para;
-		getAjaxResponse(request, "text").done(function(data){
-			return data;
-		})
-		.fail(function(data){
-			return "";
-		});
 	};
 
 	function getAjaxResponse(request, type) {
@@ -206,6 +233,14 @@
 			async: false
 		}).responseText;
 	}
+
+	/*
+		天気予報を取得する
+	*/
+	ext.getWeather = function(para) {
+		request = 'http://www.artec-kk.co.jp/lab/get_weather_info.php?zipcode=' + para;
+		return getAjaxResponse(request, "text");
+	};
 
 	/*
 		httpリクエスト用パラメータを作成する。
@@ -257,6 +292,10 @@
 		, ['r', '加速度センサー %m.accDirection の値',			'getAccelerometer', 'x']
 		, ['r', 'ボタン %m.btnPin の値',						'getButton',         'A0']
 
+		//　Additional Studuino Blockss
+		, [' ', '%m.sensors を %m.anaPin で使用',			'initAnalogSensor',          '光センサー', 'A0']
+		, [' ', '%m.sensors を %m.digPin で使用',			'initDigitalSensor',          'タッチセンサー', 'A0']
+
 		// Wi-Fi Blocks
 		// , [' ', 'SSID %s のアクセスポイントに %s で接続する',			'connectWiFi', '', '']
 
@@ -268,10 +307,9 @@
 		// , ['h', '無線で %s と %s を受け取った時',					'dummy', 'received_name', 'received_value']
 
 		// http　ブロック
-		, ['r', 'パラメータ %s と %s',						'makeHttpParameter',		'zipcode', '5810066' ]
-		, ['r', 'URL %s に %s を送ってデータを受け取る',			'getHttpResponse',			'http://www.artec-kk.co.jp/lab/get_weather_info.php', 'パラメータ' ]
+		, ['r', 'パラメータ %s と %s',							'makeHttpParameter',		'キー', '値' ]
+		, ['r', '%s に %s を送ってデータを受け取る',				'getHttpResponse',			'URLエンドポイント', 'パラメータ' ]
 		, ['r', '郵便番号 %s の明日の天気',						'getWeather', '']
-		, ['r', 'http:// %s に　%s を送った結果',				'getHttp', 'www.artec-kk.co.jp/', '']
 
 		//　English Blocks
 		// , [' ', 'Set servomtor %m.svmPin to %n degrees',      'setMotorDegree',    'D9', 90]
