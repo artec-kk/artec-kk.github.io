@@ -276,6 +276,7 @@
 			, accDirection:	['X軸', 'Y軸', 'Z軸']
 			, accels:		['加速度1', '加速度2']
 			, sensors:		['光センサー', 'タッチセンサー', '音センサー', '赤外線フォトリフレクタ']
+			, httpRequest:	['キー', '値']
 		}
 		, blocks: [
 		  [' ', 'log %s',									'log', 'sample log']
@@ -310,6 +311,9 @@
 		, ['r', 'パラメータ %s と %s',							'makeHttpParameter',		'キー', '値' ]
 		, ['r', '%s に %s を送ってデータを受け取る',				'getHttpResponse',			'URLエンドポイント', 'パラメータ' ]
 		, ['r', '郵便番号 %s の明日の天気',						'getWeather', '']
+		,　['h', "httpリクエストを受け取った時",						'dummy',]
+		,　['r', "httpリクエストの　%s 番目の %m.httpRequest",		'dummy', "1", "キー"]
+		,　['r', "httpリクエストの長さ",		'dummy',]
 
 		//　English Blocks
 		// , [' ', 'Set servomtor %m.svmPin to %n degrees',      'setMotorDegree',    'D9', 90]
