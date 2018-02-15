@@ -267,8 +267,11 @@
 			, onOff:		['ON', 'OFF']
 			, lights:		['点灯', '消灯']
 			, connects:		['接続', '切断']
-			, anaPin:		['A0','A1','A2','A3','A4','A5','A6','A7','A6','A7' ]
+			, anaPin:		['A0','A1','A2','A3','A4','A5','A6','A7' ]
 			, digiPin:		['A0','A1','A2','A3','A4','A5' ]
+			, anaaIN:		['A0','A1','A2','A3','A4','A5','A6','A7' ]
+			, digiIO:		['A0','A1','A2','A3','A4','A5', 'D2','D4','D7','D8','D9','D10','D11','D12' ]
+			, anaOUT:		['D9','D10','D11']
 			, svmPin:		['D2','D4','D7','D8','D9','D10','D11','D12' ]
 			, btnPin:		['A0','A1','A2','A3' ]
 			, dcmPin:		['M1','M2' ]
@@ -293,9 +296,37 @@
 		, ['r', '加速度センサー %m.accDirection の値',			'getAccelerometer', 'x']
 		, ['r', 'ボタン %m.btnPin の値',						'getButton',         'A0']
 
-		//　Additional Studuino Blockss
+		//　Additional Studuino Blocks
 		, [' ', '%m.sensors を %m.anaPin で使用',			'initAnalogSensor',          '光センサー', 'A0']
 		, [' ', '%m.sensors を %m.digPin で使用',			'initDigitalSensor',          'タッチセンサー', 'A0']
+
+		//　Arduino Compatibile Blocks
+		, ['r', 'アナログ入力 %m.anaaIN の値',				'dummy',	'A0']
+		, [' ', 'アナログ出力 %m.anaOUT を %s にする',		'dummy',	'A0']
+		, ['r', 'デジタル入力 %m.digiIO の値',				'dummy',	'A0']
+		, [' ', 'デジタル出力 %m.digiIO を %m.onOff',		'dummy',	'A0', 'ON']
+
+		/*
+			Pin Assign
+			|   | Analog In | Digital I/O | Anlog Out(PWM) |
+			|A0 |    o      |      o      |                |
+			|A1 |    o      |      o      |                |
+			|A2 |    o      |      o      |                |
+			|A3 |    o      |      o      |                |
+			|A4 |    o      |      o      |                |
+			|A5 |    o      |      o      |                |
+			|A6 |    o      |      x      |                |
+			|A7 |    o      |      x      |                |
+			|   |           |             |                |
+			|D2 |           |      o      |                |
+			|D4 |           |      o      |                |
+			|D7 |           |      o      |                |
+			|D8 |           |      o      |                |
+			|D9 |           |      o      |       o        |
+			|D10|           |      o      |       o        |
+			|D11|           |      o      |       o        |
+			|D12|           |      o      |                |
+		*/
 
 		// Wi-Fi Blocks
 		// , [' ', 'SSID %s のアクセスポイントに %s で接続する',			'connectWiFi', '', '']
@@ -307,13 +338,16 @@
 		// , ['h', '無線で %n を受け取った時',						'dummy', 'received_number']
 		// , ['h', '無線で %s と %s を受け取った時',					'dummy', 'received_name', 'received_value']
 
-		// http　ブロック
+		// http　ブロック（クライアント）
 		, ['r', 'パラメータ %s と %s',							'makeHttpParameter',		'キー', '値' ]
 		, ['r', '%s に %s を送ってデータを受け取る',				'getHttpResponse',			'URLエンドポイント', 'パラメータ' ]
-		, ['r', '郵便番号 %s の明日の天気',						'getWeather', '']
+		, [' ', '%s に %s を送る',								'getHttpResponse',			'URLエンドポイント', 'パラメータ' ]
+		// http　ブロック（サーバー）
 		,　['h', "httpリクエストを受け取った時",						'dummy',]
 		,　['r', "httpリクエストの　%s 番目の %m.httpRequest",		'dummy', "1", "キー"]
 		,　['r', "httpリクエストの長さ",		'dummy',]
+		// http　ブロック（マクロ）
+		, ['r', '郵便番号 %s の明日の天気',						'getWeather', '']
 
 		//　English Blocks
 		// , [' ', 'Set servomtor %m.svmPin to %n degrees',      'setMotorDegree',    'D9', 90]
