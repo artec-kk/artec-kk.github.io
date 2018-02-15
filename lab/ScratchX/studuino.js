@@ -302,7 +302,7 @@
 
 		//　Arduino Compatibile Blocks
 		, ['r', 'アナログ入力 %m.anaaIN の値',				'dummy',	'A0']
-		, [' ', 'アナログ出力 %m.anaOUT を %s にする',		'dummy',	'A0']
+		, [' ', 'アナログ出力 %m.anaOUT を %s にする',		'dummy',	'D9']
 		, ['r', 'デジタル入力 %m.digiIO の値',				'dummy',	'A0']
 		, [' ', 'デジタル出力 %m.digiIO を %m.onOff',		'dummy',	'A0', 'ON']
 
