@@ -257,7 +257,10 @@
 		if(value.slice(0, 1) == "&") {
 			value = value.slice(1);
 		}
-		request = urlEndPoint + "?" + value;
+		request = urlEndPoint;
+		if (value != null) {
+			request += "?" + value;
+		}
 		return getAjaxResponse(request, "text");
 	};
 
