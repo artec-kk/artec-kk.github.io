@@ -287,29 +287,31 @@
 			, httpRequest:	['キー', '値']
 		}
 		, blocks: [
-		  [' ', 'log %s',									'log', 'sample log']
+		  // [' ', 'log %s',									'log', 'sample log']
 		,　[' ', "Studuino と %m.connects する",				'controlBLE', '接続']
 
 		// Studuino Blocks
 		, [' ', 'LED %m.digiPin を %m.lights する',			'ledOnOff',          'A0', '点灯']
-		, [' ', 'サーボモーター　%m.svmPin を %n 度にする',			'setMotorDegree',    'D9', 90]
-		, [' ', 'DCモーター %m.dcmPin の速さを %n にする',			'setMotorPower',     'M1', 100]
-		, [' ', 'DCモーター %m.dcmPin を %m.dcmAction する',		'setMotorAction', 'M1', '正転']
+		// , [' ', 'サーボモーター　%m.svmPin を %n 度にする',			'setMotorDegree',    'D9', 90]
+		// , [' ', 'DCモーター %m.dcmPin の速さを %n にする',			'setMotorPower',     'M1', 100]
+		// , [' ', 'DCモーター %m.dcmPin を %m.dcmAction する',		'setMotorAction', 'M1', '正転']
 		, [' ', 'ブザー %m.digiPin から %n を出力する',			'buzzerOn',          'A0', 60]
 		, [' ', 'ブザー %m.digiPin off',						'buzzerOff',         'A0']
-		, ['r', '%m.sensors %m.anaPin の値',					'getSensorValue',   '光センサー', 'A0']
-		, ['r', '加速度センサー %m.accDirection の値',			'getAccelerometer', 'x']
-		, ['r', 'ボタン %m.btnPin の値',						'getButton',         'A0']
 
 		//　Additional Studuino Blocks
 		, [' ', '%m.sensors を %m.anaPin で使用',			'initAnalogSensor',          '光センサー', 'A0']
+		, ['r', '%m.sensors %m.anaPin の値',					'getSensorValue',   '光センサー', 'A0']
+
 		, [' ', '%m.sensors を %m.digPin で使用',			'initDigitalSensor',          'タッチセンサー', 'A0']
+		, ['r', 'ボタン %m.btnPin の値',						'getButton',         'A0']
+
+		, ['r', '加速度センサー %m.accDirection の値',			'getAccelerometer', 'x']
 
 		//　Arduino Compatibile Blocks
-		, ['r', 'アナログ入力 %m.anaaIN の値',				'dummy',	'A0']
-		, [' ', 'アナログ出力 %m.anaOUT を %s にする',		'dummy',	'D9']
-		, ['r', 'デジタル入力 %m.digiIO の値',				'dummy',	'A0']
-		, [' ', 'デジタル出力 %m.digiIO を %m.onOff',		'dummy',	'A0', 'ON']
+		// , ['r', 'アナログ入力 %m.anaaIN の値',				'dummy',	'A0']
+		// , [' ', 'アナログ出力 %m.anaOUT を %s にする',		'dummy',	'D9']
+		// , ['r', 'デジタル入力 %m.digiIO の値',				'dummy',	'A0']
+		// , [' ', 'デジタル出力 %m.digiIO を %m.onOff',		'dummy',	'A0', 'ON']
 
 		/*
 			Pin Assign
