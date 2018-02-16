@@ -24,6 +24,8 @@
 	const DATA_EXT2			= 0xc0;
 
 	var sensorValue　= new Array(14);
+	var tempSensorValue;
+	var offset;
 
 	/*
 		UUID
@@ -121,23 +123,22 @@
 		Notification駆動でセンサーの値を更新
 	*/
 	function onStuduinoValueChanged(event) {
-	   	var val1 = event.target.value.getUint8(0);
-	   	var val2 = event.target.value.getUint8(0);
-		var type = val1 & DATA_MASK;
-		switch (type) {
-			case DATA_SENSOR1:
-				// 
-				sensorValue[(val1 & 0x3c) >> 2] = ((val1 & 0x03) << 6) + (val2 | 0x03f);
-			break;
-			case DATA_SENSOR2:
-				// 
-			break;
-			case DATA_EXT1:
-				// 
-			break;
-			case DATA_EXT2:
-				// 
-			break;
+		for (i = 0; i < event.target.value.byteLength; i++) {
+			var val = event.target.value.getUint8(0);
+			var type = val & DATA_MASK;
+			switch (type) {
+				case DATA_SENSOR1:
+					offset = (val & 0x3c) >>> 2;
+					tempSensorValue = (val & 0x03) << 6;
+				break;
+				case DATA_SENSOR2:
+					sensorValue[offset] = tempSensorValue + (val & 0x3f);
+				break;
+				case DATA_EXT1:
+				break;
+				case DATA_EXT2:
+				break;
+			}
 		}
 	}
 
