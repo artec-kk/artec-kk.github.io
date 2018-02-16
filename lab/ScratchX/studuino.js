@@ -133,6 +133,7 @@
 				break;
 				case DATA_SENSOR2:
 					sensorValue[offset] = tempSensorValue + (val & 0x3f);
+					tempSensorValue = 0;
 				break;
 				case DATA_EXT1:
 				break;
