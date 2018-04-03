@@ -1,0 +1,8 @@
+title: Artec Co., Ltd.
+description: Artec makes learning fun!
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-minimal
+
+gems:
+  - jekyll-mentions
